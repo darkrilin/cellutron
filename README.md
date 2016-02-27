@@ -1,2 +1,2 @@
 # Cellutron
-A python 'remake' of cellular, initially designed created at the first JMSS hackathon by Riley Taylor and himself.
+A python 'remake' of cellular, made in the first official JMSS hackathon.
