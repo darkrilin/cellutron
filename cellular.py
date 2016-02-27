@@ -5,9 +5,6 @@ import pygame
 
 version = '0.0.1'
 
-def sayhi():
-    print("Hello, this is cellular")
-
 class Stage():
     class Agent():
         def __init__(self, initial_position = (0,0), initial_orientation = 0, costume = None):
@@ -27,9 +24,3 @@ class Stage():
         for row in range(self.rows):
             for column in range(self.colours):
                 self.cells[(row,column)] = self.Cell()
-
-
-
-
-# PUT ALL THE CLASSY CODE HERE
-        
