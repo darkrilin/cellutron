@@ -44,8 +44,8 @@ class Agent():
         self.costume = costume
         stage._add_new_agent(self)
         self.ORIENTATION_COORDINATES = {'N':[0,-1], 'NE':[1,-1,], 'E':[1,0], 'SE':[1,1], 'S':[1,0], 'SW':[1,-1], 'W':[0,-1], 'NW':[-1,-1]}
-        self.ORIENTATION_DEGREES = {'N':0, 'NE':45, 'E':90, 'SE':135, 'S':180, 'SW':225, 'W':270, 'NW':315}
-        self.ORIENTATION_DEGREES_REVERSE = {0:'N', 45:'NE', 90:'E', 135:'SE', 180:'S', 225:'SW', 270:'W', 315:'NW'}
+        self.ORIENTATION_DEGREES = {'N':90, 'NE':45, 'E':0, 'SE':315, 'S':270, 'SW':225, 'W':180, 'NW':135}
+        self.ORIENTATION_DEGREES_REVERSE = {90:'N', 45:'NE', 0:'E', 315:'SE', 270:'S', 225:'SW', 180:'W', 135:'NW', 360:'E'}
 
     def move_steps_forward(self,steps):
         self.position[0] += self.ORIENTATION_COORDINATES[self.orientation][0]*steps
@@ -74,6 +74,27 @@ class Agent():
     def set_orientation(self, orientation):
         assert orientation in self.ORIENTATION_COORDINATES.keys(); 'Not a valid orientation!'
         self.orientation = orientation
+
+    def point_towards_point(self,x,y):
+        if y == self.position[1]:
+            if x > self.position[x]:
+                self.orientation = 'S'
+                return self.orientation
+            else:
+                self.orientation = 'N'
+                return self.orientation
+        angle = math.degrees(math.tan(float(self.position[1] - y)/float(x - self.position[0])))
+        angle = int(angle/45)*45
+        while angle > 360:
+            angle -= 360
+        while angle < 0:
+            angle += 360
+        self.orientation = self.ORIENTATION_DEGREES_REVERSE[angle]
+        return self.orientation
+
+    def point_towards_agent(self, agent):
+        self.point_towards_point(agent.position[0],agent.position[1])
+
 
 # PUT ALL THE CLASSY CODE HERE
 if __name__ =="__main__":
