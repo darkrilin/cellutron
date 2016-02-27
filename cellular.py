@@ -39,14 +39,13 @@ class Agent():
             if type(initial_position) == list:
                 self.position = initial_position
             else:
-                return TypeError
+                raise TypeError
         self.orientation = initial_orientation
         self.costume = costume
         stage._add_new_agent(self)
         self.ORIENTATION_COORDINATES = {'N':[0,-1], 'NE':[1,-1,], 'E':[1,0], 'SE':[1,1], 'S':[1,0], 'SW':[1,-1], 'W':[0,-1], 'NW':[-1,-1]}
         self.ORIENTATION_DEGREES = {'N':0, 'NE':45, 'E':90, 'SE':135, 'S':180, 'SW':225, 'W':270, 'NW':315}
         self.ORIENTATION_DEGREES_REVERSE = {0:'N', 45:'NE', 90:'E', 135:'SE', 180:'S', 225:'SW', 270:'W', 315:'NW'}
-        stage.agents.append(self)
 
     def move_steps_forward(self,steps):
         self.position[0] += self.ORIENTATION_COORDINATES[self.orientation][0]*steps
