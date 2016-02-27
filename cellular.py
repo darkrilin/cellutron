@@ -14,7 +14,6 @@ class Stage():
         self.agents = []
 
         for row in range(self.rows):
-<<<<<<< HEAD
             for column in range(self.columns):
                 self.cells[(row,column)] = Cell()
 
@@ -39,8 +38,3 @@ class Agent():
 
 
 # PUT ALL THE CLASSY CODE HERE
-        
-=======
-            for column in range(self.colours):
-                self.cells[(row,column)] = self.Cell()
->>>>>>> origin/master
