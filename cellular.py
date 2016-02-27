@@ -2,6 +2,7 @@
 # Filename: cellular.py
 
 import pygame
+import math
 
 version = '0.0.1'
 
@@ -10,10 +11,15 @@ def sayhi():
 
 class Stage():
     class Agent():
-        def __init__(self, initial_position = (0,0), initial_orientation = 0, costume = None):
+        def __init__(self, initial_position = (0,0), initial_orientation = 'N', costume = None):
             self.position = initial_orientation
             self.orientation = initial_orientation
             self.costume = costume
+            self.orientation_dict = {'N':(0,-1), 'NE':(1,-1,), 'E':(1,0), 'SE':(1,1), 'S':(1,0), 'SW':(1,-1), 'W':(0,-1), 'NW':(-1,-1)}
+
+        def move_steps_forward(self,steps):
+            self.position[0] += self.orientation_dict[self.orientation][0]*steps
+            self.position[0] += self.orientation_dict[self.orientation][0]*steps
 
     class Cell():
         def __init__(self, colour = (255, 255, 255)):
