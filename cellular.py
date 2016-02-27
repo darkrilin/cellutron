@@ -38,3 +38,5 @@ class Agent():
 
 
 # PUT ALL THE CLASSY CODE HERE
+if __name__ =="__main__":
+    pass
