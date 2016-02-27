@@ -48,7 +48,7 @@ class Agent():
             angle += 360
         self.orientation = self.ORIENTATION_DEGREES_REVERSE[angle]
 
-   def rotate_anticlockwise(self, degrees):
+    def rotate_anticlockwise(self, degrees):
         assert degrees % 45 == 0; 'Can only turn in 45 degree increments!'
         angle = self.ORIENTATION_DEGREES[self.orientation]
         angle -= degrees
@@ -57,6 +57,10 @@ class Agent():
         while angle < 0:
             angle += 360
         self.orientation = self.ORIENTATION_DEGREES_REVERSE[angle]
+
+    def set_orientation(self, orientation):
+        assert orientation in self.ORIENTATION_COORDINATES.keys(); 'Not a valid orientation!'
+        self.orientation = orientation
 
 # PUT ALL THE CLASSY CODE HERE
 if __name__ =="__main__":
