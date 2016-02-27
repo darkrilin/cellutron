@@ -95,7 +95,19 @@ class Agent():
     def point_towards_agent(self, agent):
         self.point_towards_point(agent.position[0],agent.position[1])
 
-
+    def set_position(self,new_position): #not checking if new co-ordinates are within the parameters yet ---> DO THIS
+        if type(new_position) == list and len(new_position) == 2:
+            old_cell = self.stage.cells[(self.position[0],self.position[1])]
+            new_cell = self.stage.cells[(new_position[0],new_position[1])]
+            for i in old_cell.agents:
+                if i == self:
+                    index = old_cell.index(i)
+                    old_cell.pop(index)
+            new_cell.agents.append(self)
+            return True
+        else:
+            raise TypeError
+        
 # PUT ALL THE CLASSY CODE HERE
 if __name__ =="__main__":
     my_stage = Stage(4,6)
