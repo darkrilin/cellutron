@@ -6,9 +6,6 @@ import math
 
 version = '0.0.1'
 
-def sayhi():
-    print("Hello, this is cellular")
-
 class Stage():
     def __init__(self, columns, rows):
         self.columns = columns
@@ -17,6 +14,7 @@ class Stage():
         self.agents = []
 
         for row in range(self.rows):
+<<<<<<< HEAD
             for column in range(self.columns):
                 self.cells[(row,column)] = Cell()
 
@@ -42,3 +40,7 @@ class Agent():
 
 # PUT ALL THE CLASSY CODE HERE
         
+=======
+            for column in range(self.colours):
+                self.cells[(row,column)] = self.Cell()
+>>>>>>> origin/master
