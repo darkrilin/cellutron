@@ -57,6 +57,7 @@ class Agent():
                 self.position = initial_position
             else:
                 raise TypeError
+        self.stage = stage
         self.orientation = initial_orientation
         self.costume = costume
         stage._add_new_agent(self)
