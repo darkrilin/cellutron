@@ -18,6 +18,10 @@ class Stage():
                 self.cells[(row,column)] = Cell()
 
     def _add_new_agent(self,agent):
+        """
+        :description: Adds an agent to the list of agents and places it inside of the appropriate cell
+        :param agent: An agent object
+        """
         if type(agent) == Agent:
             self.agents.append(agent)
             location = agent.position
@@ -48,10 +52,18 @@ class Agent():
         self.ORIENTATION_DEGREES_REVERSE = {90:'N', 45:'NE', 0:'E', 315:'SE', 270:'S', 225:'SW', 180:'W', 135:'NW', 360:'E'}
 
     def move_steps_forward(self,steps):
+        """
+        :desciption: moves the agent a provided number of steps in the direction it is facing
+        :param steps: an integer number of steps to move forward
+        """
         self.position[0] += self.ORIENTATION_COORDINATES[self.orientation][0]*steps
         self.position[1] += self.ORIENTATION_COORDINATES[self.orientation][0]*steps
 
     def rotate_clockwise(self, degrees):
+        """
+        :description: Rotates the the agent in a clockwise direction
+        :param degrees: an integer that is a multiple of 45
+        """
         assert degrees % 45 == 0; 'Can only turn in 45 degree increments!'
         angle = self.ORIENTATION_DEGREES[self.orientation]
         angle += degrees
@@ -62,6 +74,10 @@ class Agent():
         self.orientation = self.ORIENTATION_DEGREES_REVERSE[angle]
 
     def rotate_anticlockwise(self, degrees):
+        """
+        :description: Rotates the agent in an anti-clockwise direction
+        :param degrees: an integer that is a multiple of 45
+        """
         assert degrees % 45 == 0; 'Can only turn in 45 degree increments!'
         angle = self.ORIENTATION_DEGREES[self.orientation]
         angle -= degrees
@@ -72,10 +88,19 @@ class Agent():
         self.orientation = self.ORIENTATION_DEGREES_REVERSE[angle]
 
     def set_orientation(self, orientation):
+        """
+        :description: Sets the agents orientation to a specified direction
+        :param orientation: A compass direction in the form of a string. e.g. "N" or "SE"
+        """
         assert orientation in self.ORIENTATION_COORDINATES.keys(); 'Not a valid orientation!'
         self.orientation = orientation
 
     def point_towards_point(self,x,y):
+        """
+        :description: Sets the agents direction to be facing a set of co-ordinates (45 degree increments)
+        :param x: x co-ordinate of focus (integer)
+        :param y: y co-ordinate of focus (integer)
+        """
         if y == self.position[1]:
             if x > self.position[x]:
                 self.orientation = 'S'
@@ -93,9 +118,17 @@ class Agent():
         return self.orientation
 
     def point_towards_agent(self, agent):
+        """
+        :description: Sets the agents direction to be facing another agent
+        :param agent: an agent object
+        """
         self.point_towards_point(agent.position[0],agent.position[1])
 
     def set_position(self,new_position): #not checking if new co-ordinates are within the parameters yet ---> DO THIS
+        """
+        :description: Sets the agents position to a set of new co-ordinates
+        :param new_position: a list of co-ordinates (integers)
+        """
         if type(new_position) == list and len(new_position) == 2:
             old_cell = self.stage.cells[(self.position[0],self.position[1])]
             new_cell = self.stage.cells[(new_position[0],new_position[1])]
