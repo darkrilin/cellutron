@@ -8,6 +8,10 @@ version = '0.0.1'
 
 class Stage():
     def __init__(self, columns, rows):
+        """
+        :param columns: integer - number of columns that the grid will have
+        :param rows: integer - number of rows that the grid will have
+        """
         self.columns = columns
         self.rows = rows
         self.cells = {}
@@ -32,11 +36,20 @@ class Stage():
 
 class Cell():
     def __init__(self, colour = (255, 255, 255)):
+        """
+        :param colour: a tuple containing three integer values between 0 and 255
+        """
         self.colour = colour
         self.agents = []
 
 class Agent():
     def __init__(self, stage, initial_position = None, initial_orientation = 'N', costume = None):
+        """
+        :param stage: the stage object
+        :param initial_position: a list of two integers that willl be the co-ordinates
+        :param initial_orientation: A compass direction in the form of a string. e.g. "N" or "SE"
+        :param costume: A string that holds the path to an image to use as the agents display picture
+        """
         if initial_position is None:
             self.position = [0,0]
         else:
