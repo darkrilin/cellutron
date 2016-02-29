@@ -61,6 +61,7 @@ class Agent():
         self.orientation = initial_orientation
         self.costume = costume
         stage._add_new_agent(self)
+
         self.ORIENTATION_COORDINATES = {'N':[0,-1], 'NE':[1,-1,], 'E':[1,0], 'SE':[1,1], 'S':[1,0], 'SW':[1,-1], 'W':[0,-1], 'NW':[-1,-1]}
         self.ORIENTATION_DEGREES = {'N':90, 'NE':45, 'E':0, 'SE':315, 'S':270, 'SW':225, 'W':180, 'NW':135}
         self.ORIENTATION_DEGREES_REVERSE = {90:'N', 45:'NE', 0:'E', 315:'SE', 270:'S', 225:'SW', 180:'W', 135:'NW', 360:'E'}
@@ -143,6 +144,10 @@ class Agent():
         :description: Sets the agents position to a set of new co-ordinates
         :param new_position: a list of co-ordinates (integers)
         """
+        if new_position[0] > (self.stage.columns - 1) or new_position[0] < 0:
+            raise ValueError("The specified x co-ordinate is outside of the boundaries")
+        if new_position[1] > (self.stage.rows - 1) or new_position[1] < 0:
+            raise ValueError("The specified y co-ordinate is outside of the boundaries")
         if type(new_position) == list and len(new_position) == 2:
             old_cell = self.stage.cells[(self.position[0],self.position[1])]
             new_cell = self.stage.cells[(new_position[0],new_position[1])]
@@ -151,11 +156,22 @@ class Agent():
                     index = old_cell.index(i)
                     old_cell.pop(index)
             new_cell.agents.append(self)
+            self.position = new_position
             return True
         else:
             raise TypeError
+
+    def get_position(self):
+        """
+        :description: accessor for the agents position
+        :return: a list of integer co-ordinates in the form [x,y]
+        """
+        return self.position
         
 # PUT ALL THE CLASSY CODE HERE
 if __name__ =="__main__":
     my_stage = Stage(4,6)
     my_agent_1 = Agent(my_stage,[2,4])
+    my_agent_1.set_position([3,5])
+    print(my_agent_1.get_position())
+    print("It was a big success")
